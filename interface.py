@@ -51,8 +51,6 @@ class Interface:
         print("(campos com * são obrigatórios)")
         print()
 
-        titulo = self.solicitaValor('Digite o título: ', 'texto', False)
-        genero = self.solicitaValor('Digite o gênero: ', 'texto', False)
         titulo = self.solicitaValor('Digite o título*: ', 'texto', False)
         genero = self.solicitaValor('Digite o gênero*: ', 'texto', False)
         duracao = self.solicitaValor('Digite a duração: ', 'texto', True)
@@ -73,6 +71,20 @@ class Interface:
         }
 
         self.banco.inserir('filmes', valores)
+    
+    def mostrarListaFilmes(self):
+        self.logotipo()
+        print("Veja abaixo a lista de filmes cadastrados.")
+        print()
+
+        filmes = self.banco.buscaDados('filmes')
+
+        for filme in filmes:
+            id, titulo, genero, duracao, diretor, estudio, classificacao, ano = filme
+            print(f"filme {id} - {titulo} | {genero}")
+        print()
+
+        input("Aperte Enter para continuar...")
 
     # Solicita um valor do usuário e valida ele.
     # return valorDigitado
